@@ -40,7 +40,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     payButton.addEventListener('click', () => {
-        alert('Transaction Successful');
-        // Optionally reset UI state here (clear subtotal, hide pay button, etc.)
+        // Redirect to payment.html and pass subtotal
+        const paymentURL = `payment.html?subtotal=${subtotal}`;
+        window.location.href = paymentURL;
     });
 });

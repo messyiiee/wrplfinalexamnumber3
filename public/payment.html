@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Gateway</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .payment-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            margin: 20px auto;
+        }
+        .payment-container h2 {
+            margin-bottom: 20px;
+        }
+        .payment-container label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        .payment-container input[type="text"],
+        .payment-container input[type="number"],
+        .payment-container input[type="month"],
+        .payment-container input[type="email"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .payment-container button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #28a745;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .payment-container button:hover {
+            background-color: #218838;
+        }
+        .payment-container .success-message {
+            display: none;
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="payment-container">
+        <h2>Payment Details</h2>
+        <form id="payment-form">
+            <label for="cardholder-name">Cardholder Name</label>
+            <input type="text" id="cardholder-name" required>
+            
+            <label for="card-number">Card Number</label>
+            <input type="number" id="card-number" required>
+            
+            <label for="expiry-date">Expiry Date</label>
+            <input type="month" id="expiry-date" required>
+            
+            <label for="cvv">CVV</label>
+            <input type="number" id="cvv" required>
+            
+            <label for="email">Email</label>
+            <input type="email" id="email" required>
+            
+            <button type="submit">Pay</button>
+        </form>
+        <p class="success-message">Transaction Successful</p>
+        <h3>Subtotal: Rp<span id="subtotal-amount">0</span></h3>
+    </div>
+
+    <script>
+        document.getElementById('payment-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            document.querySelector('.success-message').style.display = 'block';
+        });
+
+        // Retrieve the subtotal from the query string and display it
+        window.onload = function() {
+            const params = new URLSearchParams(window.location.search);
+            const subtotal = params.get('subtotal');
+            if (subtotal) {
+                document.getElementById('subtotal-amount').textContent = subtotal;
+            }
+        };
+    </script>
+</body>
+</html>
